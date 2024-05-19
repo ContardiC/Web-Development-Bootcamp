@@ -1,4 +1,3 @@
-
 var numberOfDrumButtons = document.querySelectorAll(".drum").length;
 
 for (var i = 0; i < numberOfDrumButtons; i++) {
@@ -8,11 +7,11 @@ for (var i = 0; i < numberOfDrumButtons; i++) {
     buttonAnimation(buttonInnerHTML);
   });
 }
-document.addEventListener("keydown",function(event){
+document.addEventListener("keydown", function (event) {
   makeSound(event.key);
   buttonAnimation(event.key);
 });
-function makeSound(key){
+function makeSound(key) {
   switch (key) {
     case "w":
       var tom1 = new Audio("sounds/tom-1.mp3");
@@ -47,6 +46,11 @@ function makeSound(key){
   }
 }
 
-function buttonAnimation(currentKey){
-
+function buttonAnimation(currentKey) {
+  // cerchiamo la classe con il nome della lettera nei buttons
+  var activebutton = document.querySelector("." + currentKey);
+  activebutton.classList.add("pressed");
+  setTimeout(function(){
+    activebutton.classList.remove("pressed");
+  }, 100);
 }
