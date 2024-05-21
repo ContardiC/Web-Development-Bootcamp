@@ -23,19 +23,38 @@ $("#description").html("<p>New Paragraph</p>");
 // Manipulating Attributes
 
 console.log($("img").attr("src")); // getter
-$("a").attr("href","https://www.yahoo.com"); // setter
+$("a").attr("href", "https://www.yahoo.com"); // setter
 
-// Adding Event Listeners 
+// Adding Event Listeners
 
-$("button").click(function(){
-    $("h1").css("color","pink");
+$("button").click(function () {
+  $("h1").css("color", "pink");
 });
 
-$(document).keydown(function(event){
-    alert("Hain premuto :" +event.key);
+$(document).keydown(function (event) {
+  alert("Hain premuto :" + event.key);
 });
 
-$("img").on("click",function(){
-    $("h1").css("color","red");
+$("img").on("click", function () {
+  $("h1").css("color", "red");
 });
 
+// Adding and Remove Elements
+
+$("h1").before("<button>Before Button</button>"); // aggiunge prima dell'elemento h1
+$("h1").after("<button>After Button</button>"); // aggiunge dopo l'elemento h1
+$("h1").prepend("<button>Before Button</button>"); // aggiunge prima del contenuto dell'elemento h1
+$("h1").append("<button>After Button</button>"); // aggiunge dopo il contenuto dell'elemento h1
+
+// Adding Animations
+
+$("#btn").on("click", function () {
+  // $("h1").hide(); //nasconde
+  // $("h1").fadeOut(); // dissolvenza in uscita
+  // $("h1").fadeToggle(); // dissolvenza e possibilita di ricliccare per riavere l'elemento
+  // $("h1").slideUp(); // scilova verso l'alto
+  // $("h1").slideToggle(); // scivola e possibilita di riavere l'elemento
+  // $("h1").animate({opacity: 0.5});
+  // $("h1").animate({margin:"20%" });
+  $("h1").slideUp().slideDown().animate({ opacity: 0.5 });
+});
