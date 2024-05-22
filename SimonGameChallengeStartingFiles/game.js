@@ -1,5 +1,5 @@
 //alert("The game is born!!!!");
-
+var gameStarted = false;
 var buttonColors = ["red", "blue", "green", "yellow"];
 var gamePattern = [];
 var userClickedPattern = [];
@@ -31,4 +31,12 @@ $(".btn").click(function () {
   console.log(userClickedPattern);
   playSound(userChosenColour);
   animatePress(userChosenColour);
+});
+
+$(document).keydown(function(){
+  if(gameStarted === false){
+    nextSequence();
+    gameStarted = true;
+  }
+  var level = 0;
 });
