@@ -7,8 +7,8 @@ import inquirer from 'inquirer';
 
 inquirer
   .prompt([
-    "type":"input",
     
+
   ])
   .then((answers) => {
     // Use user feedback for... whatever!!
