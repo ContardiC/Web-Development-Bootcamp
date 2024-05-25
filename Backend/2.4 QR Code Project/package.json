@@ -10,6 +10,7 @@
   "author": "Carlo Contardi",
   "license": "ISC",
   "dependencies": {
+    "fs": "^0.0.1-security",
     "inquirer": "^9.2.22",
     "qr-image": "^3.2.0"
   }
