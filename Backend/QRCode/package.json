@@ -1,7 +1,7 @@
 {
-  "name": "2.4-qr-code-project",
+  "name": "qrcode",
   "version": "1.0.0",
-  "description": "A QR Code Generator",
+  "description": "qrcode generator",
   "main": "index.js",
   "type": "module",
   "scripts": {
