@@ -7,11 +7,10 @@ inquirer
     const url = answers.URL;
     var qr_image = qr.image(url);
     qr_image.pipe(fs.createWriteStream("image.png"));
-    fs.writeFile("user-input.txt",url,(err)=>{
+    fs.writeFile("URL.txt",url,(err)=>{
         if(err) throw err;
         console.log("the file has been saved!")
     });
-
   })
   .catch((error) => {
     if (error.isTtyError) {
