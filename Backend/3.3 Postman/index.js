@@ -1,3 +1,5 @@
+// RUN npm install to install all dependecies
+
 import express from "express";
 const app = express();
 const port = 3000;
@@ -20,15 +22,15 @@ app.post("/register", (req, res) => {
   res.sendStatus(201);
 });
 
-app.put("/user/angela", (req, res) => {
+app.put("/user/carlo", (req, res) => {
   res.sendStatus(200);
 });
 
-app.patch("/user/angela", (req, res) => {
+app.patch("/user/carlo", (req, res) => {
   res.sendStatus(200);
 });
 
-app.delete("/user/angela", (req, res) => {
+app.delete("/user/carlo", (req, res) => {
   //Deleting
   res.sendStatus(200);
 });
