@@ -7,6 +7,7 @@ Questo repository è un bootcamp completo per imparare a sviluppare siti web mod
 * jQuery 
 * Framework front-end popolari come React e Vue.js per costruire applicazioni web complesse
 * Node.js e altri framework back-end (Express.js) per creare server web e API
+* Middleware con body parser
 * Database per memorizzare e gestire i dati
 * Sicurezza web per proteggere i siti web da minacce informatiche
 ## Cosa troverai in questo repository:
