@@ -15,6 +15,8 @@ app.get("/", (req, res) => {
 
 app.post("/register", (req, res) => {
   //Do something with the data
+  var data = req.data;
+  console.log(data);
   res.sendStatus(201);
 });
 
