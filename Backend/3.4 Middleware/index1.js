@@ -8,6 +8,9 @@ const app = express();
 const port = 3000;
 
 app.get("/", (req, res) => {
+  //nel caso il sito sia ospitato su un cloud non basta il percorso locale del file
+  // ma dobbiamo importare dirname e fileURLToPath
+  console.log(__dirname + "/public/index.html")
   res.sendFile(__dirname + "/public/index.html");
 });
 
