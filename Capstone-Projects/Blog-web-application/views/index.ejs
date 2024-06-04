@@ -1,0 +1,14 @@
+<%- include("partials/header.ejs") %> 
+<% if(locals.posts){ %> 
+ <div class="container-fluid"> 
+<% for(let i=0;
+i<posts.length;i++){ %>
+    
+    <div class="text-bg-info p-3"><%= posts[i] %></div>
+   
+  <% } %>
+</div>  
+   <%}else{%>
+  <h1>Non ci sono ancora post pubblicati</h1>
+  <%}%> <%- include("partials/footer.ejs") %>
+</posts.length;i++){>
