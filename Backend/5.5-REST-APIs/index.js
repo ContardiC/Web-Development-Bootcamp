@@ -18,7 +18,7 @@ const config = {
 };
 
 app.use(bodyParser.urlencoded({ extended: true }));
-
+//TODO: POST AND PUT request
 app.get("/", (req, res) => {
   res.render("index.ejs", { content: "Waiting for data..." });
 });
