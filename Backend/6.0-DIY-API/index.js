@@ -58,7 +58,23 @@ app.put("/jokes/:id", (req,res)=>{
   res.json(replacementJoke);
 });
 //6. PATCH a joke
-
+app.patch("/jokes/:id", (req,res)=>{
+  const id = parseInt(req.params.id);
+  // consideriamo che se vogliamo fare PATCH su un solo campo 
+  // dobbiamo lasciare invariati i dati già presenti quindi
+  // dobbiamo prima cercare i dati presenti
+  const existingJoke = jokes.find((joke)=> joke.id ===id);
+  
+  const replacementJoke = {
+    id:id,
+    jokeText: req.body.text || existingJoke.jokeText,
+    jokeType: req.body.type || existingJoke.jokeType,
+  };
+  const searchIndex = jokes.findIndex((joke) => joke.id === id);
+  jokes[searchIndex] = replacementJoke;
+  console.log(jokes[searchIndex]);
+  res.json(replacementJoke);
+});
 //7. DELETE Specific joke
 
 //8. DELETE All jokes
