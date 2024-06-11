@@ -8,13 +8,41 @@ const masterKey = "4VGP2DN-6EWM4SJ-N6FGRHV-Z3PR3TT";
 app.use(bodyParser.urlencoded({ extended: true }));
 
 //1. GET a random joke
-
+app.get("/random", (req, res) => {
+  let randomIndex = Math.floor(Math.random() * jokes.length);
+  res.send(jokes[randomIndex]);
+});
 //2. GET a specific joke
-
+app.get("/jokes/:id", (req, res) => {
+  // req.params per accedere a url/path paramaters
+  // con l'endopoint /:id non usiamo la query ma il parametro
+  const id = parseInt(req.params.id); // siccome joke.id è intero dobbiamo far un parseInt
+  const foundJoke = jokes.find((joke) => joke.id === id);
+  // find() scorre tutto l'array joke e se il criterio joke.id è strettamente uguale all'id fornito
+  // allora restituisce l'elemento con l'id corrispondente
+  res.json(foundJoke);
+  //lo restituiamo sotto forma di JSON 
+});
 //3. GET a jokes by filtering on the joke type
-
+app.get("/filter", (req, res)=>{
+  // quando utilizziamo i query params dobbiamo usare req.query
+  const type = req.query.type;
+  console.log(type);
+  const filteredActivities = jokes.find((joke)=> joke.jokeType === type);
+  res.json(filteredActivities);
+});
 //4. POST a new joke
-
+app.post("/jokes", (req, res)=>{
+  const newJoke = {
+    id: jokes.length + 1,
+    jokeText: req.body.text,
+    jokeType: req.body.type,
+  };
+  jokes.push(newJoke);
+  // il metodo slice() torna indietro da 0 quindi con - 1 fa vedere l'ultimo elemento dell'array
+  console.log(jokes.slice(-1));
+  res.json(newJoke);
+});
 //5. PUT a joke
 
 //6. PATCH a joke
