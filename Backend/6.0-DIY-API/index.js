@@ -44,7 +44,19 @@ app.post("/jokes", (req, res)=>{
   res.json(newJoke);
 });
 //5. PUT a joke
-
+app.put("/jokes/:id", (req,res)=>{
+  const id = parseInt(req.params.id);
+  const replacementJoke = {
+    id: id,
+    jokeText: req.body.text,
+    jokeType: req.body.type,
+  };
+  // findIndex restituisce l'indice di un determinato elemento nell'array
+  const searchIndex = jokes.findIndex((joke) => joke.id === id);
+  jokes[searchIndex]= replacementJoke;
+  //console.log(searchIndex);
+  res.json(replacementJoke);
+});
 //6. PATCH a joke
 
 //7. DELETE Specific joke
