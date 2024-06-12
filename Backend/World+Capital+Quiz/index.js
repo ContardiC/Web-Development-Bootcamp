@@ -13,8 +13,8 @@ let quiz = [
 let totalCorrect = 0;
 
 // Middleware
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static("public"));
+app.use(bodyParser.urlencoded({ extended: true })); // per ottenere i dati dai form
+app.use(express.static("public")); // per utilizzare risorse statiche
 
 let currentQuestion = {};
 
@@ -28,6 +28,7 @@ app.get("/", async (req, res) => {
 
 // POST a new post
 app.post("/submit", (req, res) => {
+  // trim() per togliere gli spazi prima e dopo la stringa 
   let answer = req.body.answer.trim();
   let isCorrect = false;
   if (currentQuestion.capital.toLowerCase() === answer.toLowerCase()) {
@@ -35,13 +36,14 @@ app.post("/submit", (req, res) => {
     console.log(totalCorrect);
     isCorrect = true;
   }
-
+  // preparo la prossima domanda con la funzione asincrona nextQuestion()
   nextQuestion();
   res.render("index.ejs", {
     question: currentQuestion,
     wasCorrect: isCorrect,
     totalScore: totalCorrect,
   });
+  // passo a index.ejs i valori per settare: domanda(question) - button (wasCorrect) - totalScore 
 });
 
 async function nextQuestion() {
