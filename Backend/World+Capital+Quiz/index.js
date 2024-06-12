@@ -1,8 +1,29 @@
 import express from "express";
 import bodyParser from "body-parser";
+import pg from "pg";
 
 const app = express();
 const port = 3000;
+
+// setup dati del database
+const db = new pg.Client({
+  user: "postgres",
+  host: "localhost",
+  database: "world",
+  password: "root",
+  port: "5433",
+});
+// connessione al database
+db.connect();
+// query per popolare il nostro array quiz
+db.query("SELECT * FROM capitals", (err, res) => {
+  if (err) {
+    console.log("Error Execting query", err.stack);
+  } else {
+    quiz = res.rows; // popolo l'arry con tutte le tuple restituite dall query
+  }
+  db.end(); // chiudo la connessione al db
+});
 
 let quiz = [
   { country: "France", capital: "Paris" },
@@ -28,7 +49,7 @@ app.get("/", async (req, res) => {
 
 // POST a new post
 app.post("/submit", (req, res) => {
-  // trim() per togliere gli spazi prima e dopo la stringa 
+  // trim() per togliere gli spazi prima e dopo la stringa
   let answer = req.body.answer.trim();
   let isCorrect = false;
   if (currentQuestion.capital.toLowerCase() === answer.toLowerCase()) {
@@ -43,7 +64,7 @@ app.post("/submit", (req, res) => {
     wasCorrect: isCorrect,
     totalScore: totalCorrect,
   });
-  // passo a index.ejs i valori per settare: domanda(question) - button (wasCorrect) - totalScore 
+  // passo a index.ejs i valori per settare: domanda(question) - button (wasCorrect) - totalScore
 });
 
 async function nextQuestion() {
