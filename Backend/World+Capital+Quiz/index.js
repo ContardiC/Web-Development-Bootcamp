@@ -15,12 +15,11 @@ const db = new pg.Client({
 });
 // connessione al database
 db.connect();
-// query per popolare il nostro array quiz
 db.query("SELECT * FROM capitals", (err, res) => {
   if (err) {
-    console.log("Error Execting query", err.stack);
+    console.log("Error Executing Query", err.stack);
   } else {
-    quiz = res.rows; // popolo l'arry con tutte le tuple restituite dall query
+    quiz = res.rows; // sostituisco i dati dell'array quiz con le tuple restituite dalla query
   }
   db.end(); // chiudo la connessione al db
 });
