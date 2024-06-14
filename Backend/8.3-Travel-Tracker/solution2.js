@@ -9,8 +9,8 @@ const db = new pg.Client({
   user: "postgres",
   host: "localhost",
   database: "world",
-  password: "123456",
-  port: 5432,
+  password: "root",
+  port: 5433,
 });
 db.connect();
 
@@ -36,7 +36,6 @@ app.get("/", async (req, res) => {
 //INSERT new country
 app.post("/add", async (req, res) => {
   const input = req.body["country"];
-
   const result = await db.query(
     "SELECT country_code FROM countries WHERE country_name = $1",
     [input]
