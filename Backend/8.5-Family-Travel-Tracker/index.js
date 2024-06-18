@@ -35,6 +35,9 @@ async function getCurrentUser(){
   users = result.rows;
   // se i dati vengono forniti da un form spesso anche l'id potrebbe essere una stringa quindi utilizzare == e non ===
   return users.find((user) => user.id == currentUserId);
+  // verifico il TIPO dei dati 
+  console.log(typeof user.id);
+  console.log(typeof currentUserId);
 }
 app.get("/", async (req, res) => {
   const countries = await checkVisisted();
@@ -71,26 +74,26 @@ app.post("/add", async (req, res) => {
   }
 });
 app.post("/user", async (req, res) => {
-  // id dello user selezionato tramite il menu a tabs
-  //console.log(req.body["user"]);  
-  currentUserId = req.body["user"];
-  
-  const countries = await checkVisisted();
-  const users = await loadUsers();
-  console.log(JSON.stringify(users[currentUserId]));
-  
-  //const color = users[currentUserId]["color"];
-  res.render("index.ejs", {
-    countries: countries,
-    total: countries.length,
-    users: users,
-    color: "red",
-  });
+  if(req.body.add === "new"){
+    // <input type="submit" name="add" value="new" id="tab">
+    // add è la chiave di questo form 
+    res.render("new.ejs");
+  }else{
+    currentUserId = req.body.user;
+    res.redirect("/");
+  }
 });
 
 app.post("/new", async (req, res) => {
   //Hint: The RETURNING keyword can return the data that was inserted.
   //https://www.postgresql.org/docs/current/dml-returning.html
+  const name = req.body.name;
+  const color = req.body.color;
+  
+  const result = await db.query("INSERT INTO users (name, color) VALUES($1, $2) RETURNING *;",[name,color]);
+  const id = result.rows[0].id;
+  currentUserId = id;
+  res.redirect("/");
 });
 
 app.listen(port, () => {
