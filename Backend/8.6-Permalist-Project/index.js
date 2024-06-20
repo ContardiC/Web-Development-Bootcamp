@@ -18,12 +18,20 @@ db.connect();
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
-let items = [
-  { id: 1, title: "Buy milk" },
-  { id: 2, title: "Finish homework" },
-];
+// let items = [
+//   { id: 1, title: "Buy milk" },
+//   { id: 2, title: "Finish homework" },
+// ];
 
-app.get("/", (req, res) => {
+let items = [];
+
+async function getTodos(){
+  const result = await db.query("SELECT * FROM items");
+  return result.rows;
+}
+
+app.get("/", async (req, res) => {
+  items = await getTodos();
   res.render("index.ejs", {
     listTitle: "Today",
     listItems: items,
