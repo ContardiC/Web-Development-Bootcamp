@@ -25,7 +25,7 @@ app.use(express.static("public"));
 
 let items = [];
 
-async function getTodos(){
+async function getTodos() {
   const result = await db.query("SELECT * FROM items");
   return result.rows;
 }
@@ -38,10 +38,16 @@ app.get("/", async (req, res) => {
   });
 });
 
-app.post("/add", (req, res) => {
+app.post("/add", async (req, res) => {
+  // TODO: insert a new todo
   const item = req.body.newItem;
-  items.push({ title: item });
-  res.redirect("/");
+  try {
+    await db.query("INSERT INTO items(title) VALUES ($1)", [item]);
+    res.redirect("/");
+  } catch (err) {
+    console.error(err);
+  }
+  // items.push({ title: item });
 });
 
 app.post("/edit", (req, res) => {});
