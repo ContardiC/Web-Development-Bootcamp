@@ -164,7 +164,7 @@ passport.use(
       try {
         console.log(profile);
         const result = await db.query("SELECT * FROM users WHERE email = $1", [
-          profile.email,
+          profile.email
         ]);
         if (result.rows.length === 0) {
           const newUser = await db.query(
